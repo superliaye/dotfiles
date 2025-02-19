@@ -6,20 +6,27 @@ alias unalias='alias /d $1'
 alias vi='vim $*'
 alias cmderr='cd /d "%CMDER_ROOT%"'
 alias rebuild='rush update && rush rebuild && echo Finished at %date% %time%'
-alias rb='rush install && rush build $* && echo Finished at %date% %time%'
-alias rbt='rush install && rush build --to $* && echo Finished at %date% %time%'
-alias rblt='rush install && rush build -l --to $* && echo Finished at %date% %time%'
+rb() {
+  rush install && rush build "$@" && echo Finished at "$(date)"
+}
+
+rbt() {
+  rush install && rush build --to "$@" && echo Finished at "$(date)"
+}
 alias gp='git pull origin --prune'
 alias gps='git push origin $*'
 alias gcm='git checkout main'
-alias gcb='git checkout -b user/liaye/$*'
+gcb() {
+  git checkout -b "user/liaye/$@"
+}
 alias ga='git add -A'
 alias gs='git status'
-alias gcp='git cherry-pick $*'
 alias gmm='git merge main'
 alias gc='git gc --prune=now && git remote prune origin'
 alias gf='git fetch origin'
-alias nb='npm run _phase:build:incremental $*'
+nb() {
+  npm run _phase:build:incremental "$@"
+}
 alias nbs='npm run _phase:build:incremental -- --source-maps'
 alias nd='npm run deploy'
 alias ndr='npm run deploy -- --rush'
@@ -31,9 +38,8 @@ alias nt='npm run tab -- --browser=ie --noAutoRun'
 alias ntr='npm run tab -- --rush'
 alias nbtr='npm run _phase:build && npm run tab -- --rush'
 alias ci='code-insiders $*'
-alias cpn='copy C:\users\liaye\.npmrc ..\..\common\config\rush\'
-alias up='git checkout origin/main -- ..\..\..\common\config\rush\pnpm-lock.yaml'
-alias upa='git checkout origin/main -- ..\..\..\common\config\rush'
+alias up='git checkout origin/main -- ../../../common/config/rush/pnpm-lock.yaml'
+alias upa='git checkout origin/main -- ../../../common/config/rush'
 
 # start-transpile-c() {
 #   rush start --to sp-transpile --to sp-transpile-components --to sp-renderable-components-base "$@"
