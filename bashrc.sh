@@ -13,6 +13,9 @@ rb() {
 rbt() {
   rush install && rush build --to "$@" && echo Finished at "$(date)"
 }
+rbw() {
+  rush install && rush build --to sp-people-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart --to sp-quicklinks-webparts "$@" && echo Finished at "$(date)"
+}
 alias gp='git pull origin --prune'
 alias gps='git push origin $*'
 alias gcm='git checkout main'
