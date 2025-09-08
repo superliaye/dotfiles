@@ -20,6 +20,7 @@ rsw() {
   rush start --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparets --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart "$@"
 }
 
+alias rab= 'rush build -o sp-ai-properties -o sp-ai-properties-tools -o sp-ai-properties-tools-internal'
 alias gp='git pull origin --prune'
 alias gps='git push origin $*'
 alias gcm='git checkout main'
