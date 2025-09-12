@@ -14,10 +14,14 @@ rbt() {
   rush install && rush build --to "$@" && echo Finished at "$(date)"
 }
 rbw() {
-  rush install && rush build --to sp-people-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart --to sp-quicklinks-webparts "$@" && echo Finished at "$(date)"
+  rush install && rush build --to sp-people-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart --to sp-quicklinks-webparts --to sp-smart-sections "$@" && echo Finished at "$(date)"
 }
 rsw() {
-  rush start --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparets --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart "$@"
+  rush start --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart --to sp-smart-sections "$@"
+}
+
+rdw() {
+  rush dev-deploy --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart "$@"
 }
 
 alias rba='rush build -o sp-ai-properties -o sp-ai-properties-tools -o sp-ai-properties-tools-internal'
