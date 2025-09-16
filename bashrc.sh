@@ -19,7 +19,6 @@ rbw() {
 rsw() {
   rush start --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart "$@"
 }
-
 rdw() {
   rush dev-deploy --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart "$@"
 }
