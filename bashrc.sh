@@ -13,17 +13,20 @@ rb() {
 rbt() {
   rush install && rush build --to "$@" && echo Finished at "$(date)"
 }
+rbtd() {
+  rush install && rush build --to "$@" && rush dev-deploy --to "$@" && echo Finished at "$(date)"
+}
 rbw() {
-  rush install && rush build --to sp-canvas-edit --to sp-people-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart --to sp-quicklinks-webparts "$@" && echo Finished at "$(date)"
+  rush install && rush build --to tag:ai-properties-web-part "$@" && echo Finished at "$(date)"
 }
 rsw() {
-  rush start --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart "$@"
+  rush start --to tag:ai-properties-web-part "$@"
 }
 rdw() {
-  rush dev-deploy --to sp-canvas-edit --to sp-people-webparts --to sp-quicklinks-webparts --to sp-image-webparts --to sp-image-webpart-next --to sp-divider-webpart --to sp-spacer-webpart "$@"
+  rush dev-deploy --to tag:ai-properties-web-part "$@" && echo Finished at "$(date)"
 }
 rba() {
-  rush build -o sp-ai-properties -o sp-ai-properties-tools -o sp-ai-properties-tools-internal
+  rush build -o sp-ai-properties -o sp-ai-properties-tools -o sp-ai-properties-tools-internal -o sp-canvas-vibe
 }
 
 alias gp='git pull origin --prune'
