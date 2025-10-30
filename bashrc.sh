@@ -28,6 +28,9 @@ rdw() {
 rba() {
   rush build -o sp-ai-properties -o sp-ai-properties-tools -o sp-ai-properties-tools-internal -o sp-canvas-vibe
 }
+rball(){
+  rush install && rush build --to tag:ai-properties-web-part --to sp-pages --to sp-canvas-vibe && rush dev-deploy --to tag:ai-properties-web-part --to sp-pages --to sp-canvas-vibe && echo Finished at "$(date)"
+}
 
 alias gp='git pull origin --prune'
 alias gps='git push origin $*'
