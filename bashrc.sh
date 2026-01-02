@@ -32,6 +32,10 @@ rbai(){
   rush install && rush build --to tag:ai-properties-web-part --to sp-pages --to sp-canvas-vibe && rush dev-deploy --to tag:ai-properties-web-part --to sp-pages --to sp-canvas-vibe && echo Finished at "$(date)"
 }
 
+rbaia() {
+  rush install && rush build -t tag:chatodsp-pages -t sp-pages && rush dev-deploy -t tag:chatodsp-pages -t sp-pages
+}
+
 alias gp='git pull origin --prune'
 alias gps='git push origin $*'
 alias gcm='git checkout main'
