@@ -1,14 +1,22 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git fetch:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git blame:*)",
+      "Bash(git shortlog:*)",
       "Bash(gh:*)",
       "Bash(npm:*)",
       "Bash(rush:*)",
       "Bash(rushx:*)",
       "Bash(node:*)",
       "Bash(bash:*)",
-
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(find:*)",
@@ -32,7 +40,6 @@
       "Bash(ps:*)",
       "Bash(env:*)",
       "Bash(printenv:*)",
-
       "Bash(echo:*)",
       "Bash(sort:*)",
       "Bash(uniq:*)",
@@ -41,12 +48,10 @@
       "Bash(sed:*)",
       "Bash(awk:*)",
       "Bash(xargs:*)",
-
       "Bash(dirname:*)",
       "Bash(basename:*)",
       "Bash(realpath:*)",
       "Bash(readlink:*)",
-
       "Bash(pnpm:*)",
       "Bash(yarn:*)",
       "Bash(npx:*)",
@@ -56,14 +61,16 @@
       "Bash(jest:*)",
       "Bash(vitest:*)",
       "Bash(make:*)",
-
       "Bash(mkdir:*)",
       "Bash(touch:*)",
       "Bash(cp:*)",
       "Bash(mv:*)",
       "Bash(docker:*)",
       "Bash(az:*)",
-      "Bash(aws:*)"
+      "Bash(aws:*)",
+      "Bash(where:*)",
+      "Bash(winget install:*)",
+      "Bash(/c/Program Files/GitHub CLI/gh.exe auth login --web --git-protocol https)"
     ]
   }
 }
