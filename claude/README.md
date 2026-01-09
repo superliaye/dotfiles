@@ -4,22 +4,25 @@ Personal Claude commands and skills for use across all environments.
 
 ## Available Commands
 
-### `/commit`
+### `/my-commit`
 Create a detailed git commit with comprehensive summary. Analyzes all changes and follows best practices.
 
-### `/create-pr`
+### `/my-create-pr`
 Create a pull request with detailed description based on all commits and changes in the branch.
 
-### `/fix-build`
+### `/my-fix-build`
 Analyze and fix build/lint errors systematically.
 
-Usage: `/fix-build [optional: specific package]`
+Usage: `/my-fix-build [optional: specific package]`
 
-### `/explain`
+### `/my-explain`
 Explain code with clear examples and context. Reads files, understands patterns, and provides practical explanations.
 
-### `/clean-code`
-Clean up code by removing unused code, fixing style violations, and improving quality.
+### `/my-clean-code`
+Clean up code and docs by removing unused code, fixing style violations, and applying evergreen documentation principles.
+
+### `/my-sync-dotfiles`
+Sync dotfiles from any repo. Finds the user's dotfiles directory, pulls latest, and reinstalls workspace setup.
 
 ## Setup
 
@@ -27,11 +30,11 @@ The install.sh script automatically symlinks `~/dotfiles/claude` to `~/.claude`,
 
 ## Adding New Commands
 
-1. Create a new `.md` file in `commands/`
+1. Create a new `my-<name>.md` file in `commands/` (prefix with `my-` to avoid conflicts)
 2. Add frontmatter for metadata (description, allowed-tools, etc.)
 3. Write the prompt
 4. Commit and push
-5. Run `cd ~/dotfiles && git pull` on other machines to sync
+5. Run `/my-sync-dotfiles` on other machines to sync
 
 ## Example Command Template
 
@@ -49,9 +52,14 @@ Use $ARGUMENTS for dynamic input.
 
 ## Syncing Across Machines
 
-After pushing changes:
+This repo tracks two remotes - push to both:
 ```bash
-cd ~/dotfiles && git pull
+git push origin main && git push personal main
 ```
 
-The symlink means changes are immediately available - no need to re-run install.sh.
+On other machines, use the `/my-sync-dotfiles` command or manually:
+```bash
+cd ~/dotfiles && git pull && ./install.sh
+```
+
+The symlink means command changes are immediately available after pull.

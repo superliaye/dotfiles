@@ -1,0 +1,25 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local overrides (machine-specific configs)
+bashrc-local.sh
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# SSH keys (safety net)
+*.pem
+*.key
+id_rsa
+id_ed25519
