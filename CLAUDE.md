@@ -9,9 +9,11 @@ Personal workspace setup for shell configuration and Claude Code integration.
 | `bashrc-general.sh` | Universal aliases (git, ls, vim) | Adding general-purpose shortcuts |
 | `bashrc-microsoft.sh` | Rush/NPM/Microsoft workflows | Adding project-specific shortcuts |
 | `bashrc.sh` | Loader (sources other files) | Rarely - only to add new modules |
-| `install.sh` | Setup script | Adding new symlinks or setup steps |
+| `sync-claude.sh` | Sync Claude config to ~/.claude/ | Changing what gets synced |
+| `install.sh` | Full setup (shell + Claude) | Adding shell setup steps |
 | `.claude/settings.local.json` | Permission whitelist | Enabling new bash commands |
 | `claude/commands/*.md` | Custom slash commands | Creating new /commands |
+| `instructions/*.md` | User instructions (CLAUDE.md) | Adding/updating rules |
 
 ## Quick Decision Tree
 

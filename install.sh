@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
+#
+# Full dotfiles setup: shell aliases + Claude Code configuration
+# For Claude-only setup, use sync-claude.sh instead
+#
+# Usage: curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/install.sh | bash
 
-# Handle curl | bash - clone repo first if needed
+set -e
+
+# Handle curl | bash - clone repo first
 if [ ! -f "${BASH_SOURCE[0]}" ] || [ "${BASH_SOURCE[0]}" = "/dev/stdin" ]; then
-  echo "Running from curl - cloning dotfiles repo..."
   DOTFILES_DIR="${HOME}/dotfiles"
   if [ -d "$DOTFILES_DIR/.git" ]; then
-    echo "  Updating existing clone..."
+    echo "Updating dotfiles..."
     git -C "$DOTFILES_DIR" pull --quiet
   else
+    echo "Cloning dotfiles..."
     git clone --quiet https://github.com/superliaye/dotfiles.git "$DOTFILES_DIR"
   fi
   exec "$DOTFILES_DIR/install.sh"
@@ -15,70 +22,19 @@ fi
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "Installing dotfiles configuration..."
+echo "Installing dotfiles..."
 echo ""
 
-# Install shell configuration
-echo "[1/2] Setting up shell aliases..."
-grep -qxF ". $DOTFILES_DIR/bashrc.sh" ~/.bashrc || echo -e "\n. $DOTFILES_DIR/bashrc.sh" >> ~/.bashrc
-grep -qxF ". $DOTFILES_DIR/bashrc.sh" ~/.zshrc || echo -e "\n. $DOTFILES_DIR/bashrc.sh" >> ~/.zshrc
-echo "  ✓ Shell configuration ready"
+# Shell configuration
+echo "[1/2] Shell aliases"
+[ -f ~/.bashrc ] && grep -qxF ". $DOTFILES_DIR/bashrc.sh" ~/.bashrc || echo -e "\n. $DOTFILES_DIR/bashrc.sh" >> ~/.bashrc
+[ -f ~/.zshrc ] && grep -qxF ". $DOTFILES_DIR/bashrc.sh" ~/.zshrc || echo -e "\n. $DOTFILES_DIR/bashrc.sh" >> ~/.zshrc 2>/dev/null || true
+echo "  -> Added to ~/.bashrc"
 
-# Install Claude Code configuration
+# Claude configuration (delegate to sync-claude.sh)
 echo ""
-echo "[2/3] Setting up Claude Code configuration..."
-mkdir -p ~/.claude
-
-# Copy global CLAUDE.md if it doesn't exist
-if [ ! -f ~/.claude/CLAUDE.md ]; then
-  if [ -f "$DOTFILES_DIR/instructions/CORE.md" ]; then
-    cp "$DOTFILES_DIR/instructions/CORE.md" ~/.claude/CLAUDE.md
-    echo "  ✓ Global CLAUDE.md created"
-  fi
-else
-  echo "  - Global CLAUDE.md already exists (skipped)"
-fi
-
-# Copy other instruction files if they don't exist
-for src in "$DOTFILES_DIR/instructions/"*.md; do
-  [ -f "$src" ] || continue
-  filename=$(basename "$src")
-  [ "$filename" = "CORE.md" ] && continue
-  dest="$HOME/.claude/$filename"
-  if [ ! -f "$dest" ]; then
-    cp "$src" "$dest"
-    echo "  ✓ $filename copied"
-  else
-    echo "  - $filename already exists (skipped)"
-  fi
-done
-
-# Symlink commands directory
-if ln -sf "$DOTFILES_DIR/claude/commands" ~/.claude/commands 2>/dev/null; then
-  echo "  ✓ Commands directory linked"
-else
-  echo "  ! Warning: Could not link commands directory"
-fi
-
-# Sync settings
-echo ""
-echo "[3/3] Syncing settings..."
-if [ -f "$DOTFILES_DIR/.claude/settings.local.json" ]; then
-  cp "$DOTFILES_DIR/.claude/settings.local.json" ~/.claude/settings.local.json
-  echo "  ✓ Settings synced"
-fi
+echo "[2/2] Claude Code"
+"$DOTFILES_DIR/sync-claude.sh"
 
 echo ""
-echo "Installation complete!"
-echo ""
-echo "Available Claude commands:"
-if [ -d ~/.claude/commands ] && ls ~/.claude/commands/*.md 1> /dev/null 2>&1; then
-  for cmd in ~/.claude/commands/*.md; do
-    basename "$cmd" .md | sed 's/^/  \//'
-  done
-else
-  echo "  (none found)"
-fi
-
-echo ""
-echo "Reload your shell or run: source ~/.bashrc"
+echo "Reload shell: source ~/.bashrc"
