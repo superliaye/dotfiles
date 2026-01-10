@@ -23,10 +23,10 @@ else
   echo "  ! Warning: Could not link commands directory"
 fi
 
-# Copy settings if they don't exist (don't overwrite existing)
-if [ -f "$DOTFILES_DIR/.claude/settings.local.json" ] && [ ! -f ~/.claude/settings.local.json ]; then
+# Sync settings (always overwrite to keep in sync)
+if [ -f "$DOTFILES_DIR/.claude/settings.local.json" ]; then
   cp "$DOTFILES_DIR/.claude/settings.local.json" ~/.claude/settings.local.json
-  echo "  ✓ Settings copied"
+  echo "  ✓ Settings synced"
 fi
 
 echo ""
