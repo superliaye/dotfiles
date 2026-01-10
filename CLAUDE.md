@@ -75,18 +75,21 @@ allowed-tools: Bash(git:*), Read, Edit
 Your prompt here. Use $ARGUMENTS for input.
 ```
 
-## Setup Prompt
+## Sync Script
 
-The agent-guided setup prompt is in [SETUP_PROMPT.md](SETUP_PROMPT.md). Users paste it into Claude to set up or update their configuration with intelligent merging.
+`sync-claude.sh` replaces `~/.claude/` with this repo's config. Run from anywhere:
 
-**When modifying these files, update SETUP_PROMPT.md:**
-- `instructions/*.md` - update file list in step 1 if adding new files
-- `claude/commands/*.md` - no change needed (discovered from claude/README.md)
-- `claude/README.md` - keep command list updated (setup prompt parses this)
-- `.claude/settings.local.json` - no change needed (auto-merged)
-- `install.sh` - no change needed (separate from prompt)
+```bash
+curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
+```
 
-**Always push to `personal` remote** - that's the public source for the setup prompt.
+**What gets synced (overwrites existing):**
+- `instructions/CORE.md` → `~/.claude/CLAUDE.md`
+- `instructions/*.md` → `~/.claude/`
+- `claude/commands/*.md` → `~/.claude/commands/`
+- `.claude/settings.local.json` → `~/.claude/settings.local.json`
+
+**Always push to `personal` remote** - that's the public source for the sync script.
 
 ## Git Remotes
 

@@ -2,27 +2,20 @@
 
 A minimal, modular dotfiles repository optimized for cross-machine synchronization and agent-friendly maintenance.
 
-## Setup Options
+## Claude Code Setup
 
-### Option 1: Agent-Guided Setup (Recommended)
-
-Copy the prompt from [SETUP_PROMPT.md](SETUP_PROMPT.md) and paste it into Claude. The agent will:
-- Fetch latest configuration from GitHub
-- Intelligently merge with existing setup
-- Preserve your customizations
-- Handle updates when this repo changes
-
-Works on any machine, new or existing setup.
-
-### Option 2: Fresh Install Script
+One-liner to sync Claude configuration (works on Windows/macOS/Linux/Codespaces):
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
 ```
 
-Simple script for new machines. Skips existing files (no merge).
+This syncs to `~/.claude/`:
+- Instructions (`CLAUDE.md`, `typescript.md`)
+- Commands (`/my-commit`, `/my-sync`, etc.)
+- Permissions (merged with existing)
 
-Both install to `~/.claude/` (user-level), so it works even when repos gitignore `.claude/` directories.
+Run again anytime to pull updates. Works even when repos gitignore `.claude/`.
 
 ## Quick Start (Full Clone)
 
