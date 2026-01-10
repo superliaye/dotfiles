@@ -26,6 +26,20 @@ else
   echo "  - Global CLAUDE.md already exists (skipped)"
 fi
 
+# Copy other instruction files if they don't exist
+for src in "$DOTFILES_DIR/instructions/"*.md; do
+  [ -f "$src" ] || continue
+  filename=$(basename "$src")
+  [ "$filename" = "CORE.md" ] && continue
+  dest="$HOME/.claude/$filename"
+  if [ ! -f "$dest" ]; then
+    cp "$src" "$dest"
+    echo "  ✓ $filename copied"
+  else
+    echo "  - $filename already exists (skipped)"
+  fi
+done
+
 # Symlink commands directory
 if ln -sf "$DOTFILES_DIR/claude/commands" ~/.claude/commands 2>/dev/null; then
   echo "  ✓ Commands directory linked"
