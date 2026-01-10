@@ -21,27 +21,36 @@ git pull
 ./install.sh
 ```
 
-### 2. Merge standards into per-user CLAUDE.md
+### 2. Detect project type
+
+Check the current working directory for:
+- **TypeScript**: `tsconfig.json` exists OR `package.json` contains "typescript"
+
+### 3. Merge standards into per-user CLAUDE.md
 
 Target: `.claude/CLAUDE.md` in the current working directory (per-user config, not the team's root `CLAUDE.md`)
 
-- Create `.claude/` directory if needed
-- **If `.claude/CLAUDE.md` doesn't exist**: Create it with content from `<dotfiles_dir>/instructions/CORE.md`
-- **If `.claude/CLAUDE.md` exists**:
-  - Check for `<!-- DOTFILES-STANDARDS-START -->` marker
-  - If marker exists: Replace content between START and END markers with latest CORE.md
-  - If no marker: Append at the end:
-    ```
+Build the content to merge:
+1. Start with `<dotfiles_dir>/instructions/CORE.md`
+2. If TypeScript project: append `<dotfiles_dir>/instructions/typescript.md`
 
-    <!-- DOTFILES-STANDARDS-START -->
-    ## Personal Standards
+Create `.claude/` directory if needed.
 
-    [contents of CORE.md here]
-    <!-- DOTFILES-STANDARDS-END -->
-    ```
+**If `.claude/CLAUDE.md` doesn't exist**: Create it with the combined content.
 
-### 3. Report
+**If `.claude/CLAUDE.md` exists**:
+- Check for `<!-- DOTFILES-STANDARDS-START -->` marker
+- If marker exists: Replace content between START and END markers with combined content
+- If no marker: Append at the end:
+  ```
+
+  <!-- DOTFILES-STANDARDS-START -->
+  [combined contents of CORE.md + typescript.md if applicable]
+  <!-- DOTFILES-STANDARDS-END -->
+  ```
+
+### 4. Report
 
 - What changed in dotfiles (git pull output)
+- Which instruction files were merged (CORE.md, typescript.md, etc.)
 - Whether `.claude/CLAUDE.md` was created/updated
-- Remind user to reload shell if needed

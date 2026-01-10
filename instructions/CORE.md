@@ -1,7 +1,5 @@
 # Instructions
 
-Also read `typescript.md` if relevant to project.
-
 ## Rules
 
 - Delete commented-out code and personal dev notes
