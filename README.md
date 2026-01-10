@@ -4,10 +4,14 @@ A minimal, modular dotfiles repository optimized for cross-machine synchronizati
 
 ## Claude Code Setup
 
-One-liner to sync Claude configuration (works on Windows/macOS/Linux/Codespaces):
+One-liner to sync Claude configuration:
 
 ```bash
+# Git Bash / macOS / Linux / Codespaces
 curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
+
+# Windows PowerShell
+curl.exe -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | & 'C:\Program Files\Git\bin\bash.exe'
 ```
 
 This syncs to `~/.claude/`:

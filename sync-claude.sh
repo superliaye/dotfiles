@@ -3,7 +3,11 @@
 # Sync Claude Code configuration to ~/.claude/ (overwrites existing)
 # Works on: Windows (Git Bash/WSL), macOS, Linux, Codespaces
 #
-# Usage: curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
+# Usage:
+#   Git Bash / macOS / Linux:
+#     curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
+#   Windows PowerShell:
+#     curl.exe -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | & 'C:\Program Files\Git\bin\bash.exe'
 
 set -e
 
@@ -17,7 +21,7 @@ if [ ! -f "${BASH_SOURCE[0]}" ] || [ "${BASH_SOURCE[0]}" = "/dev/stdin" ]; then
     echo "Cloning dotfiles..."
     git clone --quiet https://github.com/superliaye/dotfiles.git "$DOTFILES_DIR"
   fi
-  exec "$DOTFILES_DIR/sync-claude.sh"
+  exec bash "$DOTFILES_DIR/sync-claude.sh"
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

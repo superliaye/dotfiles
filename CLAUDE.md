@@ -82,7 +82,11 @@ Your prompt here. Use $ARGUMENTS for input.
 `sync-claude.sh` replaces `~/.claude/` with this repo's config. Run from anywhere:
 
 ```bash
+# Git Bash / macOS / Linux
 curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
+
+# Windows PowerShell
+curl.exe -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | & 'C:\Program Files\Git\bin\bash.exe'
 ```
 
 **What gets synced (overwrites existing):**
