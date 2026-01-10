@@ -24,6 +24,9 @@ Clean up code and docs by removing unused code, fixing style violations, and app
 ### `/my-sync-dotfiles`
 Sync dotfiles from any repo. Finds the user's dotfiles directory, pulls latest, and reinstalls workspace setup.
 
+### `/my-init`
+Initialize any Claude session with personal coding standards. Fetches instructions from https://github.com/superliaye/dotfiles/instructions/ and applies them to the current session. Auto-detects project type (TypeScript, React) and loads relevant rules.
+
 ## Setup
 
 The install.sh script automatically symlinks `~/dotfiles/claude` to `~/.claude`, making these commands available everywhere.
