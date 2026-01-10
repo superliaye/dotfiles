@@ -91,7 +91,7 @@ git push origin main && git push personal main
 
 **Sync dotfiles (from any repo):**
 ```bash
-/my-sync-dotfiles  # Finds dotfiles dir, pulls latest, reinstalls
+/my-sync           # Syncs dotfiles + merges standards into .claude/CLAUDE.md
 ```
 
 ## Deep Documentation

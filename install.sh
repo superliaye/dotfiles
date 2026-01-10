@@ -13,8 +13,18 @@ echo "  ✓ Shell configuration ready"
 
 # Install Claude Code configuration
 echo ""
-echo "[2/2] Setting up Claude Code configuration..."
+echo "[2/3] Setting up Claude Code configuration..."
 mkdir -p ~/.claude
+
+# Copy global CLAUDE.md if it doesn't exist
+if [ ! -f ~/.claude/CLAUDE.md ]; then
+  if [ -f "$DOTFILES_DIR/instructions/CORE.md" ]; then
+    cp "$DOTFILES_DIR/instructions/CORE.md" ~/.claude/CLAUDE.md
+    echo "  ✓ Global CLAUDE.md created"
+  fi
+else
+  echo "  - Global CLAUDE.md already exists (skipped)"
+fi
 
 # Symlink commands directory
 if ln -sf "$DOTFILES_DIR/claude/commands" ~/.claude/commands 2>/dev/null; then
@@ -23,7 +33,9 @@ else
   echo "  ! Warning: Could not link commands directory"
 fi
 
-# Sync settings (always overwrite to keep in sync)
+# Sync settings
+echo ""
+echo "[3/3] Syncing settings..."
 if [ -f "$DOTFILES_DIR/.claude/settings.local.json" ]; then
   cp "$DOTFILES_DIR/.claude/settings.local.json" ~/.claude/settings.local.json
   echo "  ✓ Settings synced"
