@@ -9,6 +9,7 @@
       "Bash(git remote:*)",
       "Bash(git fetch:*)",
       "Bash(git ls-files:*)",
+      "Bash(git ls-tree:*)",
       "Bash(git blame:*)",
       "Bash(git shortlog:*)",
       "Bash(gh:*)",
@@ -68,17 +69,7 @@
       "Bash(docker:*)",
       "Bash(az:*)",
       "Bash(aws:*)",
-      "Bash(where:*)",
-      "Bash(winget install:*)",
-      "Bash(/c/Program Files/GitHub CLI/gh.exe auth login --web --git-protocol https)",
-      "Bash(git ls-tree:*)",
-      "Bash(git -C \"D:/GitRepos/dotfiles\" status)",
-      "Bash(git -C \"D:/GitRepos/dotfiles\" diff)",
-      "Bash(git -C \"D:/GitRepos/dotfiles\" log --oneline -5)",
-      "Bash(git -C \"D:/GitRepos/dotfiles\" add -A)",
-      "Bash(git -C \"D:/GitRepos/dotfiles\" commit -m \"$\\(cat <<''EOF''\nFix my-sync to auto-detect and merge TypeScript instructions\n\nmy-sync now:\n- Detects TypeScript projects \\(tsconfig.json or typescript in package.json\\)\n- Merges both CORE.md and typescript.md when applicable\n- Removed manual \"read typescript.md\" instruction from CORE.md\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git -C \"D:/GitRepos/dotfiles\" push origin main)",
-      "Bash(git -C \"D:/GitRepos/dotfiles\" push personal main)"
+      "Bash(where:*)"
     ]
   }
 }

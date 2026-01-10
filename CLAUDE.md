@@ -75,6 +75,19 @@ allowed-tools: Bash(git:*), Read, Edit
 Your prompt here. Use $ARGUMENTS for input.
 ```
 
+## Setup Prompt
+
+The agent-guided setup prompt is in [SETUP_PROMPT.md](SETUP_PROMPT.md). Users paste it into Claude to set up or update their configuration with intelligent merging.
+
+**When modifying these files, update SETUP_PROMPT.md:**
+- `instructions/*.md` - update file list in step 1 if adding new files
+- `claude/commands/*.md` - no change needed (discovered from claude/README.md)
+- `claude/README.md` - keep command list updated (setup prompt parses this)
+- `.claude/settings.local.json` - no change needed (auto-merged)
+- `install.sh` - no change needed (separate from prompt)
+
+**Always push to `personal` remote** - that's the public source for the setup prompt.
+
 ## Git Remotes
 
 This repo tracks two origins - push to both for sync:

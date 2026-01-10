@@ -2,7 +2,29 @@
 
 A minimal, modular dotfiles repository optimized for cross-machine synchronization and agent-friendly maintenance.
 
-## Quick Start
+## Setup Options
+
+### Option 1: Agent-Guided Setup (Recommended)
+
+Copy the prompt from [SETUP_PROMPT.md](SETUP_PROMPT.md) and paste it into Claude. The agent will:
+- Fetch latest configuration from GitHub
+- Intelligently merge with existing setup
+- Preserve your customizations
+- Handle updates when this repo changes
+
+Works on any machine, new or existing setup.
+
+### Option 2: Fresh Install Script
+
+```bash
+curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/install.sh | bash
+```
+
+Simple script for new machines. Skips existing files (no merge).
+
+Both install to `~/.claude/` (user-level), so it works even when repos gitignore `.claude/` directories.
+
+## Quick Start (Full Clone)
 
 ```bash
 git clone https://github.com/superliaye/dotfiles.git ~/dotfiles

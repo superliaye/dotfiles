@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+# Handle curl | bash - clone repo first if needed
+if [ ! -f "${BASH_SOURCE[0]}" ] || [ "${BASH_SOURCE[0]}" = "/dev/stdin" ]; then
+  echo "Running from curl - cloning dotfiles repo..."
+  DOTFILES_DIR="${HOME}/dotfiles"
+  if [ -d "$DOTFILES_DIR/.git" ]; then
+    echo "  Updating existing clone..."
+    git -C "$DOTFILES_DIR" pull --quiet
+  else
+    git clone --quiet https://github.com/superliaye/dotfiles.git "$DOTFILES_DIR"
+  fi
+  exec "$DOTFILES_DIR/install.sh"
+fi
+
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Installing dotfiles configuration..."
