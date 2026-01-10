@@ -8,13 +8,12 @@ Copy and paste this entire prompt into Claude to set up or update your Claude Co
 
 Set up Claude Code using my dotfiles configuration from GitHub. This handles both fresh installs and updates to existing setups.
 
-**Source repo:** https://github.com/superliaye/dotfiles
+**Source repo:** https://github.com/superliaye/dotfiles/tree/main
 
 ### Steps to follow:
 
 1. **Fetch current configuration from GitHub**
-   - Base URL: `https://raw.githubusercontent.com/superliaye/dotfiles/main/`
-   - Fetch these files (use WebFetch):
+   - Fetch these files from the repo:
      - `instructions/CORE.md` - base instructions
      - `instructions/typescript.md` - TypeScript-specific instructions
      - `.claude/settings.local.json` - permissions whitelist
