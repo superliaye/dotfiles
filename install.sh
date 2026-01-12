@@ -28,6 +28,12 @@ echo ""
 
 # Shell configuration
 echo "[1/2] Shell aliases"
+
+# Clean up stale Codespace dotfiles reference (uses outdated persisted copy)
+if [ -f ~/.bashrc ]; then
+  sed -i '/\.codespaces.*dotfiles/d' ~/.bashrc 2>/dev/null || true
+fi
+
 [ -f ~/.bashrc ] && grep -qxF ". $DOTFILES_DIR/bashrc.sh" ~/.bashrc || echo -e "\n. $DOTFILES_DIR/bashrc.sh" >> ~/.bashrc
 [ -f ~/.zshrc ] && grep -qxF ". $DOTFILES_DIR/bashrc.sh" ~/.zshrc || echo -e "\n. $DOTFILES_DIR/bashrc.sh" >> ~/.zshrc 2>/dev/null || true
 echo "  -> Added to ~/.bashrc"
