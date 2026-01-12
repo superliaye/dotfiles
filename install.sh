@@ -35,7 +35,7 @@ echo "  -> Added to ~/.bashrc"
 # Claude configuration (delegate to sync-claude.sh)
 echo ""
 echo "[2/2] Claude Code"
-"$DOTFILES_DIR/sync-claude.sh"
+bash "$DOTFILES_DIR/sync-claude.sh"
 
 echo ""
 echo "Reload shell: source ~/.bashrc"
