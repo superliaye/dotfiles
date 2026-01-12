@@ -27,7 +27,7 @@ echo "Installing dotfiles..."
 echo ""
 
 # Shell configuration
-echo "[1/2] Shell aliases"
+echo "[1/3] Shell aliases"
 
 # Clean up stale Codespace dotfiles reference (uses outdated persisted copy)
 if [ -f ~/.bashrc ]; then
@@ -38,9 +38,23 @@ fi
 [ -f ~/.zshrc ] && grep -qxF ". $DOTFILES_DIR/bashrc.sh" ~/.zshrc || echo -e "\n. $DOTFILES_DIR/bashrc.sh" >> ~/.zshrc 2>/dev/null || true
 echo "  -> Added to ~/.bashrc"
 
+# Install Claude Code CLI
+echo ""
+echo "[2/3] Claude Code CLI"
+if command -v claude &> /dev/null; then
+  echo "  -> Already installed ($(claude --version 2>/dev/null || echo 'version unknown'))"
+else
+  if command -v npm &> /dev/null; then
+    npm install -g @anthropic-ai/claude-code
+    echo "  -> Installed via npm"
+  else
+    echo "  -> Skipped (npm not found)"
+  fi
+fi
+
 # Claude configuration (delegate to sync-claude.sh)
 echo ""
-echo "[2/2] Claude Code"
+echo "[3/3] Claude Code config"
 bash "$DOTFILES_DIR/sync-claude.sh"
 
 echo ""
