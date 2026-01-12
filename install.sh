@@ -45,8 +45,7 @@ if command -v claude &> /dev/null; then
   echo "  -> Already installed ($(claude --version 2>/dev/null || echo 'version unknown'))"
 else
   if command -v npm &> /dev/null; then
-    npm install -g @anthropic-ai/claude-code
-    echo "  -> Installed via npm"
+    npm install -g @anthropic-ai/claude-code --registry https://registry.npmjs.org/ 2>/dev/null && echo "  -> Installed via npm" || echo "  -> Skipped (npm install failed, run manually: npm install -g @anthropic-ai/claude-code)"
   else
     echo "  -> Skipped (npm not found)"
   fi
