@@ -2,32 +2,30 @@
 
 A minimal, modular dotfiles repository optimized for cross-machine synchronization and agent-friendly maintenance.
 
-## Claude Code Setup
+## Quick Start
 
-One-liner to sync Claude configuration:
+One-liner to install everything (bash aliases + Claude commands):
 
 ```bash
 # Git Bash / macOS / Linux / Codespaces
-curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
+curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/install.sh | bash && source ~/.bashrc
 
-# Windows PowerShell
-curl.exe -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | & 'C:\Program Files\Git\bin\bash.exe'
+# Windows PowerShell (use Git Bash terminal for aliases)
+curl.exe -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/install.sh | & 'C:\Program Files\Git\bin\bash.exe'
 ```
 
-This syncs to `~/.claude/`:
-- Instructions (`CLAUDE.md`, `typescript.md`)
-- Commands (`/my-commit`, `/my-sync`, etc.)
-- Permissions (merged with existing)
+This installs:
+- **Shell aliases** (`gc`, `gs`, `rbai`, etc.) → sourced from `~/.bashrc`
+- **Claude commands** (`/my-commit`, `/my-sync`, etc.) → `~/.claude/`
 
-Run again anytime to pull updates. Works even when repos gitignore `.claude/`.
+Run again anytime to pull updates.
 
-## Quick Start (Full Clone)
+### Claude Commands Only
+
+If you only want Claude commands (no bash aliases):
 
 ```bash
-git clone https://github.com/superliaye/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./install.sh
-source ~/.bashrc
+curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
 ```
 
 ## What's Included

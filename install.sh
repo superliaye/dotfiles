@@ -17,7 +17,7 @@ if [ ! -f "${BASH_SOURCE[0]}" ] || [ "${BASH_SOURCE[0]}" = "/dev/stdin" ]; then
     echo "Cloning dotfiles..."
     git clone --quiet https://github.com/superliaye/dotfiles.git "$DOTFILES_DIR"
   fi
-  exec "$DOTFILES_DIR/install.sh"
+  exec bash "$DOTFILES_DIR/install.sh"
 fi
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
