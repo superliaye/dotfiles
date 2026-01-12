@@ -15,7 +15,7 @@ if [ -f "$DOTFILES_DIR/bashrc-microsoft.sh" ]; then
   if [ "$LOAD_MICROSOFT_BASHRC" = "true" ] || \
      [ -d "$HOME/repos" ] || \
      [ "$CODESPACES" = "true" ] || \
-     [ -d "/workspaces/odsp-web" ]; then
+     [ -d "/workspaces" ]; then
     . "$DOTFILES_DIR/bashrc-microsoft.sh"
   fi
 fi
