@@ -69,6 +69,7 @@
       "Bash(docker:*)",
       "Bash(az:*)",
       "Bash(aws:*)",
+      "Bash(cd:*)",
       "Bash(where:*)",
       "WebFetch(domain:raw.githubusercontent.com)"
     ]
