@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
-- Split bashrc into modular files (bashrc-general.sh, bashrc-microsoft.sh)
+- Consolidated aliases into single bashrc-aliases.sh
 - Comprehensive agent documentation in docs/ directory
   - AGENT_GUIDE.md - Maintenance playbook and troubleshooting
   - ARCHITECTURE.md - System design and file purposes

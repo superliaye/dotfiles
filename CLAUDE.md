@@ -6,8 +6,7 @@ Personal workspace setup for shell configuration and Claude Code integration.
 
 | File | Purpose | When to modify |
 |------|---------|----------------|
-| `bashrc-general.sh` | Universal aliases (git, ls, vim) | Adding general-purpose shortcuts |
-| `bashrc-microsoft.sh` | Rush/NPM/Microsoft workflows | Adding project-specific shortcuts |
+| `bashrc-aliases.sh` | All aliases and functions (git, Rush, NPM) | Adding shortcuts |
 | `bashrc.sh` | Loader (sources other files) | Rarely - only to add new modules |
 | `sync-claude.sh` | Sync Claude config to ~/.claude/ | Changing what gets synced |
 | `install.sh` | Full setup (shell + Claude) | Adding shell setup steps |
@@ -18,8 +17,7 @@ Personal workspace setup for shell configuration and Claude Code integration.
 ## Quick Decision Tree
 
 **Adding an alias?**
-- Universal (git, ls, etc.) → `bashrc-general.sh`
-- Rush/NPM/Microsoft → `bashrc-microsoft.sh`
+- All aliases → `bashrc-aliases.sh`
 - One machine only → User creates `bashrc-local.sh`
 
 **Adding a Claude command?**
@@ -34,7 +32,7 @@ Personal workspace setup for shell configuration and Claude Code integration.
 
 ```bash
 # Verify syntax after editing bashrc files
-bash -n bashrc.sh && bash -n bashrc-general.sh && bash -n bashrc-microsoft.sh
+bash -n bashrc.sh && bash -n bashrc-aliases.sh
 
 # Check for duplicate aliases
 grep -r "alias <name>" bashrc*.sh
@@ -45,7 +43,7 @@ bash -c ". ./bashrc.sh && type <alias_name>"
 
 ## Principles
 
-1. **Modularity** - Keep general vs project-specific separated
+1. **Simplicity** - Single alias file, easy to maintain
 2. **Context window aware** - Keep files concise, avoid duplication
 3. **Test before commit** - Always verify syntax
 4. **Document significant changes** - Update CHANGELOG.md
@@ -54,13 +52,13 @@ bash -c ". ./bashrc.sh && type <alias_name>"
 
 **Add git alias:**
 ```bash
-# In bashrc-general.sh, add:
+# In bashrc-aliases.sh, add:
 alias gx='git command'
 ```
 
 **Add Rush function:**
 ```bash
-# In bashrc-microsoft.sh, add:
+# In bashrc-aliases.sh, add:
 rbx() {
   rush install && rush build "$@"
 }

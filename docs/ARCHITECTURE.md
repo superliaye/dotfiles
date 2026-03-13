@@ -13,8 +13,7 @@ This dotfiles repository is designed around three core principles:
 ```
 dotfiles/
 ├── bashrc.sh                    # Loader that sources other bashrc files
-├── bashrc-general.sh            # Universal shell aliases and functions
-├── bashrc-microsoft.sh          # Project-specific configurations
+├── bashrc-aliases.sh             # All shell aliases and functions
 ├── install.sh                   # Setup script (creates symlinks)
 ├── README.md                    # User-facing documentation
 ├── CHANGELOG.md                 # Change tracking
@@ -41,20 +40,14 @@ dotfiles/
 ### Shell Configuration
 
 **bashrc.sh** (Loader)
-- Sources general and project-specific bashrc files
-- Conditionally loads based on environment detection
+- Sources bashrc-aliases.sh
 - Minimal logic - just sourcing
 
-**bashrc-general.sh** (Universal)
-- Aliases/functions that work anywhere (git, ls, vim)
-- No project dependencies
-- No hardcoded paths
-- Safe for all machines
-
-**bashrc-microsoft.sh** (Project-Specific)
+**bashrc-aliases.sh** (All Aliases)
+- Universal aliases (git, ls, vim)
 - Rush/NPM workflows for SharePoint development
 - Microsoft-specific shortcuts
-- Only loaded when detected or explicitly enabled
+- Always loaded by bashrc.sh
 
 **bashrc-local.sh** (Not committed)
 - Machine-specific overrides
@@ -115,7 +108,7 @@ Copy settings: ~/dotfiles/.claude/settings.local.json → ~/.claude/
   ↓
 User reloads shell (source ~/.bashrc)
   ↓
-bashrc.sh loads → sources bashrc-general.sh + bashrc-microsoft.sh (if detected)
+bashrc.sh loads → sources bashrc-aliases.sh
   ↓
 Aliases available
   ↓
@@ -137,30 +130,13 @@ User reloads shell if bashrc changed
 
 ## Environment Detection Logic
 
-**For bashrc-microsoft.sh loading:**
-
-The loader (`bashrc.sh`) uses two methods to detect Microsoft environments:
-
-1. **Explicit override:** `export LOAD_MICROSOFT_BASHRC=true`
-2. **Auto-detect:** Check if `$HOME/repos` directory exists (common pattern)
-
-Users can customize this detection in bashrc.sh without affecting other files.
+The loader (`bashrc.sh`) unconditionally sources `bashrc-aliases.sh`.
 
 ## Extension Points
 
 ### Adding New Configuration Modules
 
-To add a new bashrc module (e.g., `bashrc-python.sh`):
-
-1. Create `bashrc-<name>.sh` with relevant aliases
-2. Add sourcing logic to `bashrc.sh`:
-   ```bash
-   if [ -f "$DOTFILES_DIR/bashrc-<name>.sh" ]; then
-     . "$DOTFILES_DIR/bashrc-<name>.sh"
-   fi
-   ```
-3. Update ARCHITECTURE.md (this file)
-4. Add entry to .gitignore if needed
+Add new aliases directly to `bashrc-aliases.sh` in the appropriate section.
 
 ### Adding New Claude Commands
 
@@ -176,10 +152,10 @@ To add a new bashrc module (e.g., `bashrc-python.sh`):
 - Claude Code expects ~/.claude/ location
 - Users can override per-machine without affecting repo
 
-**Why split bashrc files?**
-- Context window efficiency (agents read less)
-- Modularity (general configs portable)
-- Easier maintenance (clear boundaries)
+**Why a single alias file?**
+- Simpler to maintain (one place for all aliases)
+- No conditional loading logic needed
+- Easier to search for duplicates
 
 **Why docs/ directory?**
 - Separates agent docs from user docs
@@ -190,8 +166,8 @@ To add a new bashrc module (e.g., `bashrc-python.sh`):
 
 Potential additions (not planned, but architecturally sound):
 
-- `bashrc-python.sh` - Python virtualenv helpers
-- `bashrc-docker.sh` - Docker shortcuts
+- Python virtualenv helpers (add to bashrc-aliases.sh)
+- Docker shortcuts (add to bashrc-aliases.sh)
 - `claude/skills/` - Automated Claude workflows
 - `bin/` - Custom scripts (add to PATH)
 

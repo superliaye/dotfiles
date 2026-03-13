@@ -31,9 +31,8 @@ curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude
 ## What's Included
 
 ### Shell Configuration
-- **bashrc-general.sh** - Universal aliases (git, ls, vim, etc.)
-- **bashrc-microsoft.sh** - Project-specific Rush/NPM workflows
-- **bashrc.sh** - Loader that intelligently sources both
+- **bashrc-aliases.sh** - All aliases and functions (git, Rush, NPM, etc.)
+- **bashrc.sh** - Loader that sources bashrc-aliases.sh
 
 ### Claude Code Integration
 - **claude/commands/** - Custom Claude Code commands (/commit, /create-pr, etc.)
@@ -46,7 +45,7 @@ curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude
 ## Structure Philosophy
 
 This repository follows a "slim start" approach:
-- Modular configuration (general vs. project-specific)
+- Simple configuration (single alias file)
 - Minimal dependencies
 - Agent-friendly documentation
 - Easy to maintain and extend

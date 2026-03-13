@@ -253,8 +253,7 @@ allowed-tools: Bash:*
 ```bash
 # Syntax check
 bash -n bashrc.sh
-bash -n bashrc-general.sh
-bash -n bashrc-microsoft.sh
+bash -n bashrc-aliases.sh
 
 # Test alias resolution
 bash -c ". ./bashrc.sh && type gs"

@@ -23,8 +23,7 @@ Provide a lean, modular, agent-friendly dotfiles system that:
 ### Adding a New Alias
 
 **Location decision:**
-- General purpose (git, ls, etc.) → `bashrc-general.sh`
-- Project-specific (Rush, Microsoft tools) → `bashrc-microsoft.sh`
+- All aliases → `bashrc-aliases.sh`
 - One machine only → User creates `bashrc-local.sh`
 
 **Process:**

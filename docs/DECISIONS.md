@@ -29,31 +29,22 @@ Will it work across multiple machines/environments?
 ```
 
 **Examples:**
-- ✓ Git alias for pretty logs → bashrc-general.sh
-- ✓ Rush build shortcuts → bashrc-microsoft.sh
+- ✓ Git alias for pretty logs → bashrc-aliases.sh
+- ✓ Rush build shortcuts → bashrc-aliases.sh
 - ✗ API keys or secrets → Use environment variables, not dotfiles
 - ✗ Project build scripts → Keep in project repo
 
 ### "Which bashrc file should this go in?"
 
 ```
-Is this specific to Microsoft/Rush/SharePoint workflows?
-├─ Yes → bashrc-microsoft.sh
+Is it a shell alias or function?
+├─ Yes → bashrc-aliases.sh
 └─ No → Continue
 
-Does it depend on project-specific tools or paths?
-├─ Yes → bashrc-microsoft.sh
-└─ No → Continue
-
-Is it universally useful (git, ls, vim, etc.)?
-├─ Yes → bashrc-general.sh
-└─ No → Reconsider if it belongs at all
+Is it machine-specific only?
+├─ Yes → User creates bashrc-local.sh
+└─ No → bashrc-aliases.sh
 ```
-
-**Edge cases:**
-- **Git alias for Microsoft branch names** (`gcb`) → bashrc-microsoft.sh (hardcoded username)
-- **Generic git aliases** (`gp`, `gs`) → bashrc-general.sh
-- **One-off machine need** → User creates bashrc-local.sh
 
 ### "Should this be a Claude command?"
 
@@ -152,7 +143,7 @@ Before committing changes, verify:
 ### Scenario: User asks to add a new Rush alias
 
 **Decision process:**
-1. Is it Rush-specific? → Yes → bashrc-microsoft.sh
+1. Is it a shell alias? → Yes → bashrc-aliases.sh
 2. Check for duplicates: `grep -r "alias <name>" bashrc*.sh`
 3. Add in appropriate section with comment
 4. No README update needed (minor change)
@@ -190,11 +181,10 @@ Before committing changes, verify:
 
 **Don't:**
 - Hardcode absolute paths (use variables: `$HOME`, `$DOTFILES_DIR`)
-- Mix concerns (general aliases in microsoft bashrc)
+- Duplicate aliases across files
 - Add dependencies without documenting them
 - Commit secrets or API keys
 - Over-engineer (keep it simple)
-- Duplicate aliases across files
 - Skip testing before committing
 
 **Do:**
