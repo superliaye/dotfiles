@@ -1,0 +1,11 @@
+FROM ubuntu:24.04
+
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    bash git python3 dos2unix \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /repo
+COPY . .
+RUN find . -name "*.sh" -exec dos2unix -q {} +
+
+CMD ["bash", "test/run-tests.sh"]

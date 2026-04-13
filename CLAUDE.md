@@ -28,17 +28,21 @@ Personal workspace setup for shell configuration and Claude Code integration.
 - Use wildcards: `Bash(tool:*)` not specific commands
 - Never allow: `rm`, `sudo`, `chmod`, `curl`
 
-## Before Any Change
+## Validation
+
+Run `/my-validate` after any significant change, and always before committing.
+
+**Run validation when changing:**
+
+- Any `*.sh` file (shell scripts or aliases)
+- `instructions/*.md` or `claude/commands/*.md`
+- `.claude/settings.local.json`
+- `sync-claude.sh` or `install.sh`
+
+If Docker is unavailable, run directly (safe — uses a temp `$HOME`):
 
 ```bash
-# Verify syntax after editing bashrc files
-bash -n bashrc.sh && bash -n bashrc-aliases.sh
-
-# Check for duplicate aliases
-grep -r "alias <name>" bashrc*.sh
-
-# Test aliases load correctly
-bash -c ". ./bashrc.sh && type <alias_name>"
+bash test/run-tests.sh
 ```
 
 ## Principles

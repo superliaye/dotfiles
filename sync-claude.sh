@@ -52,3 +52,22 @@ echo "Done! Synced to $CLAUDE_DIR"
 echo "  - CLAUDE.md + $(ls "$SCRIPT_DIR/instructions/"*.md 2>/dev/null | wc -l | tr -d ' ') instruction files"
 echo "  - $(ls "$CLAUDE_DIR/commands/"*.md 2>/dev/null | wc -l | tr -d ' ') commands"
 echo "  - settings.local.json"
+
+# Install everything-claude-code (commands, skills, agents, hooks, rules)
+echo ""
+echo "Installing everything-claude-code..."
+ECC_DIR="${HOME}/.ecc"
+if [ -z "${SKIP_ECC:-}" ] && command -v node &> /dev/null && command -v npm &> /dev/null; then
+  if [ ! -d "$ECC_DIR/.git" ]; then
+    git clone --quiet https://github.com/affaan-m/everything-claude-code.git "$ECC_DIR" 2>/dev/null || true
+  else
+    git -C "$ECC_DIR" pull --quiet 2>/dev/null || true
+  fi
+  if [ -d "$ECC_DIR" ]; then
+    (cd "$ECC_DIR" && npm install --no-audit --no-fund --loglevel=error 2>/dev/null && bash ./install.sh --profile full 2>/dev/null) \
+      && echo "  -> Installed" \
+      || echo "  -> Failed (run manually: cd ~/.ecc && npm install && ./install.sh --profile full)"
+  fi
+else
+  echo "  -> Skipped (node/npm not found)"
+fi
