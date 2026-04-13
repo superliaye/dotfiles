@@ -34,11 +34,12 @@ echo "Syncing Claude configuration..."
 rm -rf "$CLAUDE_DIR"
 mkdir -p "$CLAUDE_DIR/commands"
 
-# Copy instructions (CORE.md -> CLAUDE.md, others as-is)
+# Merge all instructions into a single CLAUDE.md (CORE.md first, then others)
 cp "$SCRIPT_DIR/instructions/CORE.md" "$CLAUDE_DIR/CLAUDE.md"
 for f in "$SCRIPT_DIR/instructions/"*.md; do
   [ "$(basename "$f")" = "CORE.md" ] && continue
-  cp "$f" "$CLAUDE_DIR/"
+  printf '\n' >> "$CLAUDE_DIR/CLAUDE.md"
+  cat "$f" >> "$CLAUDE_DIR/CLAUDE.md"
 done
 
 # Copy commands
@@ -49,7 +50,7 @@ cp "$SCRIPT_DIR/.claude/settings.local.json" "$CLAUDE_DIR/"
 
 echo ""
 echo "Done! Synced to $CLAUDE_DIR"
-echo "  - CLAUDE.md + $(ls "$SCRIPT_DIR/instructions/"*.md 2>/dev/null | wc -l | tr -d ' ') instruction files"
+echo "  - CLAUDE.md (merged from $(ls "$SCRIPT_DIR/instructions/"*.md 2>/dev/null | wc -l | tr -d ' ') instruction files)"
 echo "  - $(ls "$CLAUDE_DIR/commands/"*.md 2>/dev/null | wc -l | tr -d ' ') commands"
 echo "  - settings.local.json"
 

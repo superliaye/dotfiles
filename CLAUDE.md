@@ -92,8 +92,7 @@ curl.exe -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-cl
 ```
 
 **What gets synced (overwrites existing):**
-- `instructions/CORE.md` → `~/.claude/CLAUDE.md`
-- `instructions/*.md` → `~/.claude/`
+- `instructions/*.md` → merged into `~/.claude/CLAUDE.md` (CORE.md first, then others)
 - `claude/commands/*.md` → `~/.claude/commands/`
 - `.claude/settings.local.json` → `~/.claude/settings.local.json`
 
