@@ -58,7 +58,11 @@ rbai() {
 }
 
 rbaia() {
-  rush install && rush build -t tag:chatodsp-pages -t sp-pages && rush dev-deploy -t tag:chatodsp-pages -t sp-pages
+  rush install && rush build -t tag:chatodsp-pages -t sp-pages -t tag:ai-properties-web-part -t sp-pages -t sp-canvas-vibe && rush dev-deploy -t tag:chatodsp-pages -t sp-pages -t tag:ai-properties-web-part -t sp-pages -t sp-canvas-vibe
+}
+
+rsaia() {
+  rush install && rush start -t tag:chatodsp-pages -t sp-pages -t tag:ai-properties-web-part -t sp-pages -t sp-canvas-vibe
 }
 
 # Git function for user branches
