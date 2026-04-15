@@ -30,8 +30,9 @@ CLAUDE_DIR="$HOME/.claude"
 
 echo "Syncing Claude configuration..."
 
-# Remove existing and recreate
-rm -rf "$CLAUDE_DIR"
+# Clean managed directories (preserve plugins/ — managed by claude CLI)
+rm -rf "$CLAUDE_DIR/commands"
+rm -f "$CLAUDE_DIR/CLAUDE.md" "$CLAUDE_DIR/settings.local.json"
 mkdir -p "$CLAUDE_DIR/commands"
 
 # Merge all instructions into a single CLAUDE.md (CORE.md first, then others)
