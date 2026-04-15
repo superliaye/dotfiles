@@ -1,56 +1,31 @@
 ---
 description: Sync dotfiles and merge coding standards into local per-user CLAUDE.md
-allowed-tools: Bash(git:*, bash:*, ls:*, mkdir:*), Read, Edit, Write, Glob
+allowed-tools: Bash(git:*, bash:*, ls:*, cat:*), Read
 ---
 
-Sync the user's dotfiles and merge coding standards into the current repo's per-user config.
+Sync the user's dotfiles by running the authoritative shell script. All sync logic lives in `sync-claude.sh` -- do NOT duplicate it here.
 
 ## Steps
 
-### 1. Find and sync dotfiles
+### 1. Find dotfiles directory
 
 ```bash
-# Find dotfiles directory
-ls -d ~/dotfiles ~/.dotfiles ~/GitRepos/dotfiles 2>/dev/null | head -1
+ls -d ~/dotfiles ~/.dotfiles ~/GitRepos/dotfiles /d/GitRepos/dotfiles 2>/dev/null | head -1
 ```
 
-Navigate there, pull latest, run install:
+### 2. Pull latest and run sync
+
 ```bash
 cd <dotfiles_dir>
 git pull
-./install.sh
+bash ./sync-claude.sh
 ```
 
-### 2. Detect project type
+The script handles everything: merging instruction files into `~/.claude/CLAUDE.md`, copying commands, copying settings, and installing everything-claude-code.
 
-Check the current working directory for:
-- **TypeScript**: `tsconfig.json` exists OR `package.json` contains "typescript"
+### 3. Report
 
-### 3. Merge standards into user CLAUDE.md
-
-Target: `~/.claude/CLAUDE.md` (user's home directory, not inside the repo)
-
-Build the content to merge:
-1. Start with `<dotfiles_dir>/instructions/CORE.md`
-2. If TypeScript project: append `<dotfiles_dir>/instructions/typescript.md`
-
-Create `~/.claude/` directory if needed.
-
-**If `~/.claude/CLAUDE.md` doesn't exist**: Create it with the combined content.
-
-**If `~/.claude/CLAUDE.md` exists**:
-- Check for `<!-- DOTFILES-STANDARDS-START -->` marker
-- If marker exists: Replace content between START and END markers with combined content
-- If no marker: Append at the end:
-  ```
-
-  <!-- DOTFILES-STANDARDS-START -->
-  [combined contents of CORE.md + typescript.md if applicable]
-  <!-- DOTFILES-STANDARDS-END -->
-  ```
-
-### 4. Report
-
+Summarize the output from `sync-claude.sh`:
 - What changed in dotfiles (git pull output)
-- Which instruction files were merged (CORE.md, typescript.md, etc.)
-- Whether `~/.claude/CLAUDE.md` was created/updated
+- How many instruction files were merged
+- How many commands were synced
