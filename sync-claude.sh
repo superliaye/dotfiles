@@ -72,3 +72,14 @@ if [ -z "${SKIP_ECC:-}" ] && command -v node &> /dev/null && command -v npm &> /
 else
   echo "  -> Skipped (node/npm not found)"
 fi
+
+# Install superpowers plugin (agentic skills framework: TDD, debugging, planning)
+echo ""
+echo "Installing superpowers plugin..."
+if command -v claude &> /dev/null; then
+  claude plugin install superpowers@claude-plugins-official --scope user 2>/dev/null \
+    && echo "  -> Installed" \
+    || echo "  -> Failed (run manually: /plugin install superpowers@claude-plugins-official)"
+else
+  echo "  -> Skipped (claude CLI not found)"
+fi
