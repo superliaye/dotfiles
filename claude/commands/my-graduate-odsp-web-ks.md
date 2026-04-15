@@ -7,7 +7,7 @@ Graduate killswitches for the given user alias (by default if not provided: liay
 
 ## Step 1: Find killswitches
 
-Search for the alias across all `**/KillSwitch*.ts` and `**/killswitch*.ts` files in the repo using Grep. Extract each match's:
+Search for the alias across all `**/*.ts` files in the repo using Grep. Extract each match's:
 - Date (from the comment, e.g. `'MM/DD/YYYY'` or `'YYYY-MM-DD'`)
 - Function name
 - GUID
@@ -40,9 +40,12 @@ ks-killer does mechanical code removal but often leaves behind dead code. System
 5. **Always-undefined values**: Props or params hardcoded to `undefined` after KS removal (e.g. `dataSources: undefined`). If the consumer ignores them, remove from both sides.
 6. **Unused imports**: Imports that became unreferenced after removing KS code. Remove them.
 7. **Unused SCSS classes**: CSS classes only referenced from removed KS code paths. Remove the class definitions.
-8. **Stale comments**: `@deprecated - Remove when graduating <KS name>` comments for KSes that are now graduated. Remove them.
+8. **Stale comments**: `@deprecated - Remove when graduating <KS name>` comments for KSes that are now graduated. Remove them. Also remove any inline KS-branch comments (e.g. `// When KS activated: ...`, `// --- KS gate ---`, `// New pipeline (when KS is NOT activated)`) left in code where the branching no longer exists. Warn the user if the code can't be safely cleaned up.
 9. **Type errors**: ks-killer may inline a value like `regenerateInput.userPrompt` where the old code had `userPrompt || ''`. If the type is `string | undefined` but the target expects `string`, add `|| ''` or equivalent.
 10. **Naming convention violations**: ks-killer prefixes unused params with `_` (e.g. `_mode`), but this repo's lint rule (`@typescript-eslint/naming-convention`) requires camelCase. Revert to the original param name without underscore — the original code compiled fine with unused callback params.
+11. **Wrong branch inlined**: For every graduated KS, verify the correct branch was kept. `isXxxKSActivated()` returns `true` on rollback — graduating means keeping the NOT-activated path. `isXxxEnabled()` returns `!KS.isActivated(...)` — graduating means keeping the true (enabled) path. If ks-killer inlined the wrong branch, manually restore the correct one.
+12. **Empty KillSwitch files**: If graduating the only KS in a file leaves behind only an unused import, delete the file entirely and fix any `import { type X }` → `import type { X }` errors caused by removal.
+13. **Always-constant arguments (aggressive cleanup)**: When ks-killer inlines a constant into a function call argument position (e.g. `fromAICanvasResultToRaw(..., true, ...)`), grep ALL callers of that function across the entire repo. If every caller passes the identical constant — or omits the parameter and the default matches — remove the parameter from the function signature, its interface/options type, and every call site. If any caller passes a different value, leave the parameter but document that it was audited.
 
 ## Step 4: Check for cross-project killswitches
 
@@ -53,11 +56,21 @@ grep -r "<guid>" --include="*.ts" --include="*.tsx" <repo-root>
 
 If any cross-project copies exist outside the already-processed files, graduate those too by running ks-killer with `--id` (no `-p` flag), then repeat Step 3 for the new changes.
 
-## Step 5: Build
+## Step 5: Spawn a code review agent
+
+After all cleanup is complete, spawn a `code-reviewer` subagent to review all changed files. Provide it:
+- The full git diff
+- The list of graduated GUIDs and their function names
+- KS semantics: `isXxxKSActivated()` = rollback when true; `isXxxEnabled()` = `!KS.isActivated()` = enabled when true
+- The Step 3 checklist as best-practice criteria
+
+Incorporate any CRITICAL or HIGH findings before proceeding. Report MEDIUM/LOW findings to the user.
+
+## Step 6: Build
 
 Run `rush build -t <package-name>` for each affected package. Fix any errors or warnings, then rebuild until clean (0 errors, 0 warnings).
 
-## Step 6: Report
+## Step 7: Report
 
 Print the Merlin verification commands that ks-killer output:
 ```
@@ -65,5 +78,7 @@ Test-GridKillSwitch -KillSwitchId "<guid>" -Global
 ```
 
 Remind the user to run these in Merlin before merging to confirm none are currently activated in production.
+
+**Do not run `git add` or `git commit`. Leave staging and committing to the user.**
 
 $ARGUMENTS
