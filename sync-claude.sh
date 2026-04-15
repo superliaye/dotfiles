@@ -78,9 +78,10 @@ fi
 echo ""
 echo "Installing superpowers plugin..."
 if command -v claude &> /dev/null; then
-  claude plugin install superpowers@claude-plugins-official --scope user 2>/dev/null \
+  echo "  claude path: $(command -v claude)"
+  SP_OUT=$(claude plugin install superpowers@claude-plugins-official --scope user 2>&1) \
     && echo "  -> Installed" \
-    || echo "  -> Failed (run manually: /plugin install superpowers@claude-plugins-official)"
+    || echo "  -> Failed: $SP_OUT"
 else
   echo "  -> Skipped (claude CLI not found)"
 fi
