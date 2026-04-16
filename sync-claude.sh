@@ -78,12 +78,10 @@ fi
 echo ""
 echo "Installing superpowers plugin..."
 if command -v claude &> /dev/null; then
-  echo "  marketplace add:"
-  claude plugin marketplace add anthropics/claude-plugins-official 2>&1 || true
-  echo "  plugin install:"
-  claude plugin install superpowers@claude-plugins-official --scope user 2>&1 \
+  claude plugin marketplace add obra/superpowers 2>/dev/null || true
+  claude plugin install superpowers@superpowers-dev --scope user 2>/dev/null \
     && echo "  -> Installed" \
-    || echo "  -> Failed"
+    || echo "  -> Failed (run manually: claude plugin marketplace add obra/superpowers && claude plugin install superpowers@superpowers-dev --scope user)"
 else
   echo "  -> Skipped (claude CLI not found)"
 fi
