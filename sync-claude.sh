@@ -43,6 +43,15 @@ for f in "$SCRIPT_DIR/instructions/"*.md; do
   cat "$f" >> "$CLAUDE_DIR/CLAUDE.md"
 done
 
+# Append external behavioral guidelines (forrestchang/andrej-karpathy-skills)
+KARPATHY_URL="https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md"
+KARPATHY_STATUS="skipped (fetch failed)"
+if KARPATHY_CONTENT=$(curl -sSL --fail --max-time 10 "$KARPATHY_URL" 2>/dev/null); then
+  printf '\n' >> "$CLAUDE_DIR/CLAUDE.md"
+  printf '%s\n' "$KARPATHY_CONTENT" >> "$CLAUDE_DIR/CLAUDE.md"
+  KARPATHY_STATUS="included"
+fi
+
 # Copy commands
 cp "$SCRIPT_DIR/claude/commands/"*.md "$CLAUDE_DIR/commands/"
 
@@ -51,7 +60,7 @@ cp "$SCRIPT_DIR/.claude/settings.local.json" "$CLAUDE_DIR/"
 
 echo ""
 echo "Done! Synced to $CLAUDE_DIR"
-echo "  - CLAUDE.md (merged from $(ls "$SCRIPT_DIR/instructions/"*.md 2>/dev/null | wc -l | tr -d ' ') instruction files)"
+echo "  - CLAUDE.md (merged from $(ls "$SCRIPT_DIR/instructions/"*.md 2>/dev/null | wc -l | tr -d ' ') instruction files; karpathy: $KARPATHY_STATUS)"
 echo "  - $(ls "$CLAUDE_DIR/commands/"*.md 2>/dev/null | wc -l | tr -d ' ') commands"
 echo "  - settings.local.json"
 
