@@ -9,19 +9,31 @@ Sync the user's dotfiles by running the authoritative shell script. All sync log
 
 ### 1. Find dotfiles directory
 
+Try these locations in order, pick the first that exists:
+
 ```bash
-ls -d ~/dotfiles ~/.dotfiles ~/GitRepos/dotfiles /d/GitRepos/dotfiles 2>/dev/null | head -1
+ls -d ~/dotfiles ~/.dotfiles ~/GitRepos/dotfiles ~/repos/dotfiles ~/src/dotfiles /workspaces/.codespaces/.persistedshare/dotfiles /c/GitRepos/dotfiles /d/GitRepos/dotfiles /e/GitRepos/dotfiles 2>/dev/null | head -1
 ```
 
 ### 2. Pull latest and run sync
 
 DO NOT SKIP!
 
+**If a local dotfiles directory was found:**
+
 ```bash
 cd <dotfiles_dir>
 git pull
 bash ./sync-claude.sh
 ```
+
+**If no local dotfiles directory was found**, fall back to the remote sync — it auto-clones to `~/dotfiles`:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude.sh | bash
+```
+
+Do NOT ask the user where their dotfiles live — just use the remote fallback.
 
 The script handles everything: merging instruction files into `~/.claude/CLAUDE.md`, copying commands, copying settings, installing everything-claude-code, and installing the superpowers plugin.
 
