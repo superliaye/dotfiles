@@ -87,34 +87,6 @@ Is it user-facing (new command, changed behavior)?
 └─ No → Commit message might be enough
 ```
 
-### "Should I expand Claude permissions?"
-
-```
-Is the command needed for documented workflows?
-├─ Yes → Continue
-└─ No → Reject
-
-Can it be scoped with wildcards? (e.g., git:*)
-├─ Yes → Use wildcards
-└─ No → Add specific pattern
-
-Is it destructive (rm, sudo, chmod 777)?
-├─ Yes → Reject
-└─ No → Add to whitelist
-```
-
-**Current whitelist categories:**
-- `git:*` - Version control operations
-- `npm:*`, `rush:*` - Build and package management
-- `ls:*`, `cat:*`, `find:*` - Read-only file operations
-- `grep:*`, `tree:*`, `wc:*` - Analysis tools
-
-**Explicitly not whitelisted:**
-- `rm:*` - File deletion
-- `sudo:*` - Elevated privileges
-- `chmod:*`, `chown:*` - Permission changes
-- `curl:*`, `wget:*` - Network operations (add if needed)
-
 ## Consistency Checks
 
 Before committing changes, verify:
@@ -148,15 +120,6 @@ Before committing changes, verify:
 3. Add in appropriate section with comment
 4. No README update needed (minor change)
 5. Commit: "Add <alias> for <purpose>"
-
-### Scenario: User wants Claude to run npm install
-
-**Decision process:**
-1. Is npm:* whitelisted? → Check settings.local.json
-2. If yes → Command allowed
-3. If no → Ask user if they want to expand permissions
-4. If expanding → Update settings.local.json + commit
-5. Document in CHANGELOG.md if significant
 
 ### Scenario: Agent discovers commented-out code
 

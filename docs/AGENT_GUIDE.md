@@ -41,16 +41,6 @@ Provide a lean, modular, agent-friendly dotfiles system that:
 4. Update `claude/README.md` with command description
 5. Test: Run install.sh, verify command appears
 
-### Modifying Permissions
-
-**File:** `.claude/settings.local.json`
-
-**Guidelines:**
-- Use wildcards for command families: `Bash(git:*)`
-- Avoid overly specific paths (brittle)
-- Never allow destructive commands globally: `rm -rf`, `sudo`
-- Test: Attempt blocked command, verify it's denied
-
 ### Updating Documentation
 
 **When to update:**

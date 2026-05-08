@@ -18,8 +18,6 @@ dotfiles/
 ├── README.md                    # User-facing documentation
 ├── CHANGELOG.md                 # Change tracking
 ├── .gitignore                   # Exclude temp files, local overrides
-├── .claude/
-│   └── settings.local.json      # Claude Code permissions
 ├── claude/
 │   ├── README.md                # Command documentation
 │   └── commands/                # Custom Claude Code commands
@@ -62,24 +60,17 @@ dotfiles/
 - Symlinked to ~/.claude/commands by install.sh
 - Auto-synced via git pull (no reinstall)
 
-**.claude/settings.local.json** (Permissions)
-- Whitelists bash command patterns
-- Prevents accidental destructive operations
-- Copied (not symlinked) to ~/.claude/ by install.sh
-- Can be overridden per machine
-
 ### Setup and Configuration
 
 **install.sh** (Setup Script)
 - Appends source line to ~/.bashrc and ~/.zshrc
 - Creates symlinks for Claude commands
-- Copies settings if not present
 - Idempotent (safe to run multiple times)
 
 **.gitignore** (Exclusions)
 - OS-specific files (.DS_Store, Thumbs.db)
 - Editor configs (.vscode, .idea)
-- Local overrides (bashrc-local.sh, settings.local.json)
+- Local overrides (bashrc-local.sh)
 
 ### Documentation
 
@@ -103,8 +94,6 @@ User runs install.sh
 Append source line to ~/.bashrc, ~/.zshrc
   ↓
 Create symlink: ~/.claude/commands → ~/dotfiles/claude/commands
-  ↓
-Copy settings: ~/dotfiles/.claude/settings.local.json → ~/.claude/
   ↓
 User reloads shell (source ~/.bashrc)
   ↓

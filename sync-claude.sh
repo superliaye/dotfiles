@@ -32,7 +32,7 @@ echo "Syncing Claude configuration..."
 
 # Clean managed directories (preserve plugins/ — managed by claude CLI)
 rm -rf "$CLAUDE_DIR/commands"
-rm -f "$CLAUDE_DIR/CLAUDE.md" "$CLAUDE_DIR/settings.local.json"
+rm -f "$CLAUDE_DIR/CLAUDE.md"
 mkdir -p "$CLAUDE_DIR/commands"
 
 # Merge all instructions into a single CLAUDE.md (CORE.md first, then others)
@@ -55,14 +55,10 @@ fi
 # Copy commands
 cp "$SCRIPT_DIR/claude/commands/"*.md "$CLAUDE_DIR/commands/"
 
-# Copy settings
-cp "$SCRIPT_DIR/.claude/settings.local.json" "$CLAUDE_DIR/"
-
 echo ""
 echo "Done! Synced to $CLAUDE_DIR"
 echo "  - CLAUDE.md (merged from $(ls "$SCRIPT_DIR/instructions/"*.md 2>/dev/null | wc -l | tr -d ' ') instruction files; karpathy: $KARPATHY_STATUS)"
 echo "  - $(ls "$CLAUDE_DIR/commands/"*.md 2>/dev/null | wc -l | tr -d ' ') commands"
-echo "  - settings.local.json"
 
 # Install everything-claude-code (commands, skills, agents, hooks, rules)
 echo ""

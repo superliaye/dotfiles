@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Removed
 - Commented-out code from bashrc.sh (lines 67-69)
 - Skills directory references from install.sh
+- `.claude/settings.local.json` permission allowlist (Claude Code Auto mode supersedes the need to maintain a per-machine allowlist). Sync script, validation tests, and docs updated to drop the concept.
 
 ## [0.1.0] - 2026-01-09
 

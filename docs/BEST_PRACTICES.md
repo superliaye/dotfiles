@@ -109,9 +109,9 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 ```
 Add Rush build aliases for AI Properties project
 
-Update .claude permissions to include npm and rush commands
-
 Fix install.sh to skip missing skills directory
+
+Update sync-claude.sh to merge instruction files
 ```
 
 **Bad examples:**
@@ -193,7 +193,7 @@ Focus on: $ARGUMENTS
 
 ### Allowed Tools
 
-Be specific to minimize permission creep:
+Declare the minimal `allowed-tools` set each slash command actually needs — it documents intent and helps reviewers spot a command that's grown beyond its purpose.
 
 ```yaml
 # Good (specific)
@@ -339,29 +339,6 @@ alias nvm='nvm_lazy'
 - Config files in .gitignore: `bashrc-local.sh`
 - Placeholders: `<your-username>`
 
-### Permission Whitelisting
-
-**In .claude/settings.local.json:**
-
-Only whitelist commands necessary for documented workflows:
-
-```json
-{
-  "permissions": {
-    "allow": [
-      "Bash(git:*)",      // Version control
-      "Bash(npm:*)",      // Package management
-      "Bash(ls:*)"        // Read-only operations
-    ]
-  }
-}
-```
-
-**Never whitelist:**
-- `Bash(rm:*)` - Destructive
-- `Bash(sudo:*)` - Elevated privileges
-- `Bash(curl:*)` - Network (unless explicitly needed)
-
 ## Maintenance Cadence
 
 **Regular (monthly):**
@@ -373,7 +350,6 @@ Only whitelist commands necessary for documented workflows:
 **As needed:**
 - Add new aliases when workflow emerges
 - Create Claude commands for repeated tasks
-- Update permissions when new tools needed
 - Refactor when files exceed size guidelines
 
 **Never:**

@@ -22,10 +22,9 @@ bash test/run-tests.sh
 ## What it checks
 
 1. `bash -n` syntax on all `*.sh` files
-2. JSON validity of `.claude/settings.local.json`
-3. No duplicate aliases in `bashrc*.sh`
-4. `sync-claude.sh` produces expected files (`CLAUDE.md`, `commands/`, `settings.local.json`)
-5. Re-running sync is idempotent
+2. No duplicate aliases in `bashrc*.sh`
+3. `sync-claude.sh` produces expected files (`CLAUDE.md`, `commands/`)
+4. Re-running sync is idempotent
 
 ## On failure
 

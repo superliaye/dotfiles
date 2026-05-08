@@ -39,7 +39,7 @@ curl -sSL https://raw.githubusercontent.com/superliaye/dotfiles/main/sync-claude
 - **claude/README.md** - Command documentation and usage
 
 ### Configuration
-- **.claude/settings.local.json** - Permissions for Claude Code operations
+
 - **install.sh** - Automated setup script
 
 ## Structure Philosophy
